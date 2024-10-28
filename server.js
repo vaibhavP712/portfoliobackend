@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGO_URI, {
 // Routes
 app.get('/comments', async (req, res) => {
     const comments = await Comment.find();
-    res.json(comments);
+    res.json({ message: 'Comments will be here!' });
 });
 
 app.post('/comments', async (req, res) => {
