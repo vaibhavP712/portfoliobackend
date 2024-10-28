@@ -19,7 +19,11 @@ const Comment = require('./models/Comment');
 
 
 // Middleware
-app.use(express.json());
+app.use((req, res, next) => {
+    console.log(`Request URL: ${req.url}`);
+    next();
+});
+
 
 // Route to fetch all comments
 app.get('/comments', async (req, res) => {
