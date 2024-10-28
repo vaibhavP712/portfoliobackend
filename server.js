@@ -4,7 +4,11 @@ const mongoose = require('mongoose');
 const Comment = require('./models/Comment');
 const app = express();
 
-app.use(express.json()); // for parsing JSON data
+app.use((req, res, next) => {
+    console.log(`Request URL: ${req.url}`);
+    next();
+});
+ // for parsing JSON data
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
