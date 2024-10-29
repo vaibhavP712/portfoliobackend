@@ -39,7 +39,8 @@ app.get('/comments', async (req, res) => {
 
 // Route to add a new comment
 app.post('/comments', async (req, res) => {
-    const newComment = new Comment({ content: req.body.content });
+    const { name, message } = req.body;  // Use name and message fields
+    const newComment = new Comment({ name, message }); // Match the schema
     try {
         const savedComment = await newComment.save();
         res.status(201).json(savedComment);
