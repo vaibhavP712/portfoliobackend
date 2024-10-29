@@ -17,7 +17,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Comment = require('./models/Comment');
 
-
 // Middleware
 app.use((req, res, next) => {
     console.log(`Request URL: ${req.url}`);

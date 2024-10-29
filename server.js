@@ -2,15 +2,19 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const Comment = require('./models/Comment'); // Ensure this path is correct
+
 const app = express();
 
+// Add middleware to parse JSON
+app.use(express.json());
+
+// Logging middleware
 app.use((req, res, next) => {
     console.log(`Request URL: ${req.url}`);
     next();
 });
- // for parsing JSON data
 
-// Connect to MongoDB
+// MongoDB connection
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
