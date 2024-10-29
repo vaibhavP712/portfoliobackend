@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const Comment = require('./models/Comment');
+const Comment = require('./models/Comment'); // Ensure this path is correct
 const app = express();
 
 app.use((req, res, next) => {
@@ -18,16 +18,30 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.log(err));
 
-// Routes
-app.get('/comments', async (req, res) => {
-    const comments = await Comment.find();
-    res.json({ message: 'Comments will be here!' });
+// Root route
+app.get('/', (req, res) => {
+    res.send("Welcome to my comments API!");
 });
 
+// Route to fetch all comments
+app.get('/comments', async (req, res) => {
+    try {
+        const comments = await Comment.find();
+        res.json(comments);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// Route to add a new comment
 app.post('/comments', async (req, res) => {
     const newComment = new Comment({ content: req.body.content });
-    await newComment.save();
-    res.status(201).json(newComment);
+    try {
+        const savedComment = await newComment.save();
+        res.status(201).json(savedComment);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
 });
 
 // Start server
