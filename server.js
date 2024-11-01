@@ -3,9 +3,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Comment = require('./models/Comment'); // Ensure this path is correct
 const cors = require('cors');
-app.use(cors());
 
 const app = express();
+app.use(cors());
 
 // Add middleware to parse JSON
 app.use(express.json());
