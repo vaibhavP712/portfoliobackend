@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const Comment = require('./models/Comment'); // Ensure this path is correct
+const cors = require('cors');
+app.use(cors());
 
 const app = express();
 
