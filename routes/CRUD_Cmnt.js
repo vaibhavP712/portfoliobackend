@@ -8,8 +8,8 @@ const { body, validationResult } = require('express-validator');
 // GET all comments
 router.get('/', async (req, res) => {
     try {
-        const comments = await Comment.find().sort({ createdAt: -1 });
-        res.json(comments);
+        const comments = await Comment.find().sort({ createdAt: -1 }).limit(10);
+        res.json(comments.reverse()); // Reverse to show oldest first
     } catch (err) {
         console.error("Error fetching comments:", err);
         res.status(500).json({ message: 'Failed to retrieve comments' });
