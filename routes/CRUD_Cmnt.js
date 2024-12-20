@@ -35,7 +35,7 @@ router.post(
             const savedComment = await newComment.save();
             res.status(201).json(savedComment);
         } catch (err) {
-            console.error("Error saving comment:", err);
+            console.error("Oops", err);
             res.status(500).json({ message: 'Failed to save comment' });
         }
     }
