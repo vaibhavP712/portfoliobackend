@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const Comment = require('../models/Comment');
+const Comment = require('../models/Cmnt_Schema');
 const { body, validationResult } = require('express-validator');
 
 // GET all comments
@@ -28,7 +28,7 @@ router.post(
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        
+
         const { name, message } = req.body;
         const newComment = new Comment({ name, message });
         try {
